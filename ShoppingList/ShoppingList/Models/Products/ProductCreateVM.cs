@@ -4,7 +4,7 @@ namespace ShoppingList.Models.Products
 {
     public class ProductCreateVM
     {
-        public int Íd { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 3)]
