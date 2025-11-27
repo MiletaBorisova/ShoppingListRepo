@@ -48,5 +48,27 @@ namespace ShoppingList.Controllers
             return View(products);
         }
 
+        //GET: ProductsController/Edit/5
+        public IActionResult Edit(int id) 
+        {
+            var product = this.data.Products.Find(id);
+            var productToEdit = new ProductCreateVM()
+            { ProductName = product.ProductName };
+            return View(productToEdit);
+        }
+
+        //POST: ProductsController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, ProductCreateVM model)
+        {
+            var product = this.data.Products.Find(id);
+            product.ProductName = model.ProductName;
+            this.data.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+
     }
 }
