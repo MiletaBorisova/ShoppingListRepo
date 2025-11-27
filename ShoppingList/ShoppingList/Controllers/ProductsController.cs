@@ -69,6 +69,17 @@ namespace ShoppingList.Controllers
 
         }
 
+        //POST: ProductsController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id) 
+        {
+            var product = this.data.Products.Find(id);
+            this.data.Products.Remove(product);
+            this.data.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
     }
 }
