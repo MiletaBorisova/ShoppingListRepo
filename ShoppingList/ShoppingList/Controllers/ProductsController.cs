@@ -14,11 +14,6 @@ namespace ShoppingList.Controllers
             this.data = data;
         }
 
-        //GET: ProductsController
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         //GET: ProductsController/Create
         public IActionResult Create()
@@ -39,6 +34,18 @@ namespace ShoppingList.Controllers
             data.SaveChanges();
             return RedirectToAction("Index");
 
+        }
+        //GET: ProductsController
+        public IActionResult Index()
+        {
+            var products = data.Products
+                .Select(x => new ProductListVM()
+                {
+                    Id = x.Id,
+                    ProductName = x.ProductName
+                })
+                .ToList();
+            return View(products);
         }
 
     }
